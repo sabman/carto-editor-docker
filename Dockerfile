@@ -42,6 +42,9 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive \
       nodejs npm && \
       rm -rf /var/lib/apt/lists/*
 
+RUN git config --global user.email docker@codefornl.nl
+RUN git config --global user.name "CodeForNL docker"
+
 # ogr2ogr2 static build, see https://github.com/CartoDB/cartodb/wiki/How-to-build-gdal-and-ogr2ogr2
 RUN cd /opt && git clone https://github.com/OSGeo/gdal ogr2ogr2 && cd ogr2ogr2 && \
   git remote add cartodb https://github.com/cartodb/gdal && git fetch cartodb && \
