@@ -31,16 +31,16 @@ ENV REDIS_PORT 6379
 # Setup OS
 RUN dpkg-reconfigure locales && \
       locale-gen en_US.UTF-8 && \
-      update-locale LANG=en_US.UTF-8 && \ 
-  apt-get update && DEBIAN_FRONTEND=noninteractive \
-  apt-get install -y --no-install-recommends make g++ git-core \
-    unp \
-    zip \
-    libicu-dev \
-    gdal-bin libgdal1-dev libgdal-dev \
-    python-all-dev python-pip \
-    nodejs npm && \
-    rm -rf /var/lib/apt/lists/*
+      update-locale LANG=en_US.UTF-8
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive \
+    apt-get install -y --no-install-recommends make g++ git-core \
+      unp \
+      zip \
+      libicu-dev \
+      gdal-bin libgdal1-dev libgdal-dev \
+      python-all-dev python-pip \
+      nodejs npm && \
+      rm -rf /var/lib/apt/lists/*
 
 # ogr2ogr2 static build, see https://github.com/CartoDB/cartodb/wiki/How-to-build-gdal-and-ogr2ogr2
 RUN cd /opt && git clone https://github.com/OSGeo/gdal ogr2ogr2 && cd ogr2ogr2 && \
