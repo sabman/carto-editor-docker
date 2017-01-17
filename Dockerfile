@@ -10,7 +10,7 @@ ENV GDAL_DATA /usr/share/gdal/1.10
 ENV BUNDLE_PATH /bundle_cache
 ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
 ENV C_INCLUDE_PATH=/usr/include/gdal
-ENV PATH=$PATH:/carto/node_modules/grunt-cli/bin
+ENV PATH=$PATH:/usr/local/rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/carto/node_modules/grunt-cli/bin
 
 ENV CARTO_ENV development
 ENV CARTO_SESSION_DOMAIN localdomain
@@ -58,8 +58,8 @@ RUN cd /opt && git clone https://github.com/OSGeo/gdal ogr2ogr2 && cd ogr2ogr2 &
 # Install rvm RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
 RUN curl -L https://get.rvm.io | bash -s stable --ruby && \
   echo 'source /usr/local/rvm/scripts/rvm' >> /etc/bash.bashrc && \
-  /bin/bash -l -c rvm requirements && \
-  PATH /usr/local/rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin RUN echo rvm_max_time_flag=15 >> ~/.rvmrc && \
+  /bin/bash -l -c rvm requirements
+RUN echo rvm_max_time_flag=15 >> ~/.rvmrc && \
   /bin/bash -l -c 'rvm install 2.2.3' && \
   /bin/bash -l -c 'rvm use 2.2.3 --default' && \
   /bin/bash -l -c 'gem install bundle archive-tar-minitar' && /bin/bash -l -c 'gem install bundler --no-doc --no-ri'
