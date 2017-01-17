@@ -67,7 +67,7 @@ RUN curl -L https://get.rvm.io | bash -s stable --ruby && \
 VOLUME /bundle_cache
 
 # Setup Carto
-RUN git clone --depth 1 --branch master https://github.com/cartodb/cartodb.git /carto && cd /carto && \
+RUN git clone --depth 1 --branch master https://github.com/codefornl/cartodb.git /carto && cd /carto && \
   git submodule init && \
   git submodule foreach --recursive 'git rev-parse HEAD | xargs -I {} git fetch origin {} && git reset --hard FETCH_HEAD' && \
   git submodule update --recursive
