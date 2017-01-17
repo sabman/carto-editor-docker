@@ -29,13 +29,14 @@ ENV REDIS_HOST redis
 ENV REDIS_PORT 6379
 
 # Setup OS
-RUN dpkg-reconfigure locales && \
-      locale-gen en_US.UTF-8 && \
-      update-locale LANG=en_US.UTF-8
+RUN locale-gen en_US.UTF-8 && \
+      update-locale LANG=en_US.UTF-8 && dpkg-reconfigure locales
+
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive \
     apt-get install -y --no-install-recommends make g++ git-core \
       unp \
       zip \
+      curl \
       libicu-dev \
       gdal-bin libgdal1-dev libgdal-dev \
       python-all-dev python-pip \
