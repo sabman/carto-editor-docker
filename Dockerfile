@@ -29,20 +29,21 @@ ENV REDIS_HOST redis
 ENV REDIS_PORT 6379
 
 # Setup OS
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive \
-  apt-get install -y --no-install-recommends apt-utils make g++ git-core \
+RUN dpkg-reconfigure locales && \
+      locale-gen en_US.UTF-8 && \
+      update-locale LANG=en_US.UTF-8 && \ 
+  apt-get update && DEBIAN_FRONTEND=noninteractive \
+  apt-get install -y --no-install-recommends make g++ git-core \
     unp \
     zip \
     libicu-dev \
-    locales \
-    lsb-release \
     gdal-bin libgdal1-dev libgdal-dev \
     python-all-dev python-pip \
     nodejs npm && \
     rm -rf /var/lib/apt/lists/*
 
 # ogr2ogr2 static build, see https://github.com/CartoDB/cartodb/wiki/How-to-build-gdal-and-ogr2ogr2
-RUN cd /opt && git clone --depth 1 --branch master https://github.com/OSGeo/gdal ogr2ogr2 && cd ogr2ogr2 && \
+RUN cd /opt && git clone https://github.com/OSGeo/gdal ogr2ogr2 && cd ogr2ogr2 && \
   git remote add cartodb https://github.com/cartodb/gdal && git fetch cartodb && \
   git checkout trunk && git pull origin trunk && \
   git checkout upstream && git merge -s ours --ff-only origin/trunk && \
