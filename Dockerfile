@@ -40,7 +40,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive \
       libicu-dev \
       gdal-bin libgdal1-dev libgdal-dev \
       python-all-dev python-pip \
-      nodejs npm && \
+      nodejs npm phantomjs && \
       rm -rf /var/lib/apt/lists/*
 
 RUN git config --global user.email docker@codefornl.nl
