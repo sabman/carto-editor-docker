@@ -38,7 +38,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive \
       zip \
       curl \
       libicu-dev \
-      gdal-bin libgdal1-dev libgdal-dev \
+      gdal-bin libgdal1-dev libgdal-dev libproj-dev \
       python-all-dev python-pip \
       nodejs npm phantomjs && \
       rm -rf /var/lib/apt/lists/*
@@ -53,7 +53,7 @@ RUN cd /opt && git clone https://github.com/OSGeo/gdal ogr2ogr2 && cd ogr2ogr2 &
   git checkout upstream && git merge -s ours --ff-only origin/trunk && \
   git checkout ogr2ogr2 && git merge -s ours upstream -m "Merged it" && \
   cd ogr2ogr2 && ./configure --disable-shared && make -j 4 && \
-  cp apps/ogr2ogr /usr/bin/ogr2ogr2 && rm -rf /opt/ogr2ogr2 /root/.gitconfig
+  cp apps/ogr2ogr /usr/bin/ogr2ogr && rm -rf /opt/ogr2ogr2 /root/.gitconfig
 
 # Install rvm RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
 RUN curl -L https://get.rvm.io | bash -s stable --ruby && \
@@ -83,7 +83,7 @@ COPY Gruntfile.js /carto/Gruntfile.js
 
 # Node requirements
 # RUN npm cache clean && npm install -g n && n 0.10 && npm update -g npm@^2
-RUN npm install .
+#RUN npm install .
 
 # Python requirements
 RUN pip install --no-use-wheel -r python_requirements.txt

@@ -1,5 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env bash
 set -e
+
+source /usr/local/rvm/scripts/rvm
 
 # Rails server is not always stopped correctly, remove pid
 if [ -f tmp/pids/server.pid ]; then
