@@ -95,5 +95,5 @@ VOLUME /carto/public/assets
 # Start
 ADD run.sh /run.sh
 RUN chmod 755 /*.sh
-
+ENV CARTO_ASSET_HOST //cartodb-libs.global.ssl.fastly.net/cartodbui
 CMD ["/run.sh"]
