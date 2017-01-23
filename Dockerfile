@@ -86,7 +86,7 @@ COPY Gruntfile.js /carto/Gruntfile.js
 #RUN npm install .
 
 # Python requirements
-RUN pip install --no-use-wheel -r python_requirements.txt
+RUN ln -s /usr/bin/nodejs /usr/bin/node && pip install --no-use-wheel -r python_requirements.txt
 
 # Create a volume for assets so we do not have to recreate them all the time
 RUN mkdir -p /carto/public/assets
