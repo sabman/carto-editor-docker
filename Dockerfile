@@ -13,6 +13,8 @@ ENV C_INCLUDE_PATH=/usr/include/gdal
 ENV PATH=$PATH:/usr/local/rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/carto/node_modules/grunt-cli/bin
 
 ENV CARTO_ENV development
+ENV CARTO_ASSET_HOST //cartodb-libs.global.ssl.fastly.net/cartodbui
+ENV CARTO_HOST localhost.localdomain
 ENV CARTO_SESSION_DOMAIN localdomain
 ENV CARTO_SESSION_PORT 3000
 
@@ -95,5 +97,4 @@ VOLUME /carto/public/assets
 # Start
 ADD run.sh /run.sh
 RUN chmod 755 /*.sh
-ENV CARTO_ASSET_HOST //cartodb-libs.global.ssl.fastly.net/cartodbui
 CMD ["/run.sh"]

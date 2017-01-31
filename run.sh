@@ -16,7 +16,7 @@ cp config/grunt_docker.json /carto/config/grunt_$CARTO_ENV.json
 sed -i "s^__DB_HOST__^$DB_HOST^g" config/database.yml
 sed -i "s^__DB_PORT__^$DB_PORT^g" config/database.yml
 sed -i "s^__DB_USER__^$DB_USER^g" config/database.yml
-
+sed -i "s^__CARTO_HOST__^$CARTO_HOST^g" config/app_config.yml
 sed -i "s^__CARTO_ASSET_HOST__^$CARTO_ASSET_HOST^g" config/app_config.yml
 sed -i "s^__CARTO_SESSION_DOMAIN__^$CARTO_SESSION_DOMAIN^g" config/app_config.yml
 sed -i "s^__CARTO_SESSION_PORT__^$CARTO_SESSION_PORT^g" config/app_config.yml

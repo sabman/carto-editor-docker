@@ -15,7 +15,7 @@ defaults: &defaults
   http_port:           __CARTO_SESSION_PORT__ # nil|integer. HTTP port to use when building urls. Leave empty to use default (80)
   https_port:          # nil|integer. HTTPS port to use when building urls. Leave empty to use default (443)
   secret_token:       '71c2b25921b84a1cb21c71503ab8fb23'
-  account_host:       '__CARTO_SESSION_DOMAIN__:__CARTO_SESSION_PORT__'
+  account_host:       '__CARTO_HOST__'
   account_path:       '/account'
   vizjson_cache_domains: ['.__CARTO_SESSION_DOMAIN__']
   data_library:
@@ -39,8 +39,7 @@ defaults: &defaults
       verifycert:     false
     public:
       protocol:      'http'
-      domain:        '__MAP_API_HOST__'
-      port:          '__MAP_API_PORT__'
+      domain:        '__CARTO_HOST__'
       verifycert:     false
   sql_api:
     private:
@@ -50,9 +49,8 @@ defaults: &defaults
       port:       __SQL_API_PORT__
     public:
       protocol:   'http'
-      domain:     '__SQL_API_HOST__'
+      domain:     '__CARTO_HOST__'
       endpoint:   '/api/v2/sql'
-      port:       __SQL_API_PORT__
   api_requests_service_url: ''
   developers_host:    'http://developers.__CARTO_SESSION_DOMAIN__:__CARTO_SESSION_PORT__'
   google_analytics:
