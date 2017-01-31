@@ -33,8 +33,7 @@ cat >&2 <<-'EOWARN'
       FIRST RUN:
         On first run, assets need to be created and you
         may want the database initialized.
-
-        bundle exec grunt --environment $CARTO_ENV
+        npm install . && bundle exec grunt --environment $CARTO_ENV
         bundle exec rake db:create
         bundle exec rake db:migrate
 

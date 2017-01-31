@@ -34,8 +34,7 @@ defaults: &defaults
       verifycert:     false
     private:
       protocol:      'http'
-      domain:        '__MAP_API_HOST__'
-      port:          '__MAP_API_PORT__'
+      domain:        '__CARTO_HOST__'
       verifycert:     false
     public:
       protocol:      'http'
@@ -44,9 +43,8 @@ defaults: &defaults
   sql_api:
     private:
       protocol:   'http'
-      domain:     '__SQL_API_HOST__'
+      domain:     '__CARTO_HOST__'
       endpoint:   '/api/v1/sql'
-      port:       __SQL_API_PORT__
     public:
       protocol:   'http'
       domain:     '__CARTO_HOST__'
