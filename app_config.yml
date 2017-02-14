@@ -27,27 +27,31 @@ defaults: &defaults
   tiler:
     filter: 'mapnik'
     internal:
-      protocol:      'http'
+      protocol:      '__MAP_API_PROTOCOL__'
       domain:        '__MAP_API_HOST__'
       port:          '__MAP_API_PORT__'
       host:          '__MAP_API_HOST__'
       verifycert:     false
     private:
-      protocol:      'http'
+      protocol:      '__CARTO_PROTOCOL__'
       domain:        '__CARTO_HOST__'
+      port:          '__CARTO_SESSION_PORT__'
       verifycert:     false
     public:
-      protocol:      'http'
+      protocol:      '__CARTO_PROTOCOL__'
       domain:        '__CARTO_HOST__'
+      port:          '__CARTO_SESSION_PORT__'
       verifycert:     false
   sql_api:
     private:
-      protocol:   'http'
+      protocol:   '__CARTO_PROTOCOL__'
       domain:     '__CARTO_HOST__'
+      port:       '__CARTO_SESSION_PORT__'
       endpoint:   '/api/v1/sql'
     public:
-      protocol:   'http'
+      protocol:   '__CARTO_PROTOCOL__'
       domain:     '__CARTO_HOST__'
+      port:       '__CARTO_SESSION_PORT__'
       endpoint:   '/api/v2/sql'
   api_requests_service_url: ''
   developers_host:    'http://developers.__CARTO_SESSION_DOMAIN__:__CARTO_SESSION_PORT__'
@@ -250,11 +254,11 @@ defaults: &defaults
         debug:              false
         visible:            true
         tiler_domain:       "__CARTO_SESSION_DOMAIN__"
-        tiler_port:         "80"
-        tiler_protocol:     "http"
+        tiler_port:         "__CARTO_SESSION_PORT__"
+        tiler_protocol:     "__CARTO_PROTOCOL__"
         sql_domain:         "__CARTO_SESSION_DOMAIN__"
-        sql_port:           "80"
-        sql_protocol:       "http"
+        sql_port:           "___CARTO_SESSION_PORT__"
+        sql_protocol:       "__CARTO_PROTOCOL__"
         extra_params:       { cache_policy: 'persist' }
         tile_style_history: []
         style_version:      "2.1.1"

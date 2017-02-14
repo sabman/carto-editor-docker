@@ -17,11 +17,11 @@ ENV CARTO_ASSET_HOST //cartodb-libs.global.ssl.fastly.net/cartodbui
 ENV CARTO_HOST localhost.localdomain
 ENV CARTO_SESSION_DOMAIN localdomain
 ENV CARTO_SESSION_PORT 3000
+ENV CARTO_PROTOCOL http
 
 ENV MAP_API_HOST maps-api
 ENV MAP_API_PORT 8181
-ENV SQL_API_HOST sql-api
-ENV SQL_API_PORT 8080
+ENV MAP_API_PROTOCOL http
 
 ENV DB_HOST db
 ENV DB_PORT 5432
@@ -97,6 +97,6 @@ RUN mkdir -p /carto/public/assets
 VOLUME /carto/public/assets
 
 # Start
-ADD run.sh /run.sh
+COPY run.sh /run.sh
 RUN chmod 755 /*.sh
 CMD ["/run.sh"]
