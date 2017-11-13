@@ -1,5 +1,5 @@
 FROM ubuntu:trusty
-MAINTAINER Milo van der Linden <milo@dogodigi.net>
+MAINTAINER Shoaib Burq <saburq@gmail.com>
 
 # Environment variables, change as needed
 # Configuring locales
@@ -14,8 +14,11 @@ ENV PATH=$PATH:/usr/local/rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/
 
 ENV CARTO_ENV development
 ENV CARTO_ASSET_HOST //cartodb-libs.global.ssl.fastly.net/cartodbui
-ENV CARTO_HOST localhost.localdomain
-ENV CARTO_SESSION_DOMAIN localdomain
+# localhost.localdomain => domain name of the docker host
+# CARTO_HOST
+# CARTO_SESSION_DOMAIN
+ENV CARTO_HOST carto.dev
+ENV CARTO_SESSION_DOMAIN carto.dev
 ENV CARTO_SESSION_PORT 3000
 ENV CARTO_PROTOCOL http
 
@@ -49,8 +52,8 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive \
       nodejs npm phantomjs && \
       rm -rf /var/lib/apt/lists/*
 
-RUN git config --global user.email docker@codefor.nl
-RUN git config --global user.name "CodeForNL docker"
+RUN git config --global user.email saburq@gmail.com
+RUN git config --global user.name "sabman docker"
 
 # ogr2ogr2 static build, see https://github.com/CartoDB/cartodb/wiki/How-to-build-gdal-and-ogr2ogr2
 RUN cd /opt && git clone https://github.com/OSGeo/gdal ogr2ogr2 && cd ogr2ogr2 && \
@@ -62,13 +65,26 @@ RUN cd /opt && git clone https://github.com/OSGeo/gdal ogr2ogr2 && cd ogr2ogr2 &
   cp apps/ogr2ogr /usr/bin/ogr2ogr && ln -s /usr/bin/ogr2ogr /usr/bin/ogr2ogr2 && rm -rf /opt/ogr2ogr2 /root/.gitconfig
 
 # symlink nodejs. install rvm, ruby and bundle
-RUN ln -s /usr/bin/nodejs /usr/bin/node && curl -L https://get.rvm.io | bash -s stable --ruby && \
-  echo 'source /usr/local/rvm/scripts/rvm' >> /etc/bash.bashrc && \
-  /bin/bash -l -c rvm requirements
+RUN apt-get update -q && \
+    apt-get install -qy gnupg2 --no-install-recommends && apt-get clean
+
+RUN gpg2 --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
+RUN curl -sSL https://get.rvm.io | bash -s
+RUN /bin/bash -l -c ". /etc/profile.d/rvm.sh"
+
 RUN echo rvm_max_time_flag=15 >> ~/.rvmrc && \
-  /bin/bash -l -c 'rvm install 2.2.3' && \
-  /bin/bash -l -c 'rvm use 2.2.3 --default' && \
+  /bin/bash -l -c 'rvm install 2.3.3' && \
+  /bin/bash -l -c 'rvm use 2.3.3 --default' && \
   /bin/bash -l -c 'gem install bundle archive-tar-minitar' && /bin/bash -l -c 'gem install bundler --no-doc --no-ri'
+
+RUN ln -s /usr/bin/nodejs /usr/bin/node
+# RUN ln -s /usr/bin/nodejs /usr/bin/node && curl -L https://get.rvm.io | bash -s stable --ruby && \
+#   echo 'source /usr/local/rvm/scripts/rvm' >> /etc/bash.bashrc && \
+#   /bin/bash -l -c rvm requirements
+# RUN echo rvm_max_time_flag=15 >> ~/.rvmrc && \
+#   /bin/bash -l -c 'rvm install 2.2.3' && \
+#   /bin/bash -l -c 'rvm use 2.2.3 --default' && \
+#   /bin/bash -l -c 'gem install bundle archive-tar-minitar' && /bin/bash -l -c 'gem install bundler --no-doc --no-ri'
 
 # Create a volume for gem files
 VOLUME /bundle_cache

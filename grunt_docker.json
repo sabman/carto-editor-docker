@@ -1,4 +1,4 @@
 {
-  "use_minify": false,
-  "http_path_prefix": ""
+  "use_minify": true,
+  "http_path_prefix": "//cartodb-libs.global.ssl.fastly.net/cartodbui"
 }
