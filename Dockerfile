@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM ubuntu:trusty-20190425
 MAINTAINER Shoaib Burq <saburq@gmail.com>
 
 # Environment variables, change as needed
